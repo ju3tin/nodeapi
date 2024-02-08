@@ -83,11 +83,7 @@ app.post('/upload-photos', async (req, res) => {
             });
     
             //return response
-            res.send({
-                status: true,
-                message: 'Files are uploaded',
-                data: data
-            });
+         
             let data1 = 'curl -XPOST \'https://api.wit.ai/speech\' \\\r\n     -i -L \\\r\n     -H "Authorization: Bearer WN27BV76PBRPKC3MLZIWFYRJPEZEFXEJ" \\\r\n     -H "Content-Type: audio/wav" \\\r\n     --data-binary "@tmp/hello_world.wav"';
             
             let config = {
@@ -109,7 +105,12 @@ app.post('/upload-photos', async (req, res) => {
               console.log(error);
             });
             
-
+            res.send({
+                status: true,
+                message: 'Files are uploaded',
+                data: data,
+                dude: response
+            });
 
         }
     } catch (err) {

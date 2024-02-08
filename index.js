@@ -88,6 +88,29 @@ app.post('/upload-photos', async (req, res) => {
                 message: 'Files are uploaded',
                 data: data
             });
+            let data1 = 'curl -XPOST \'https://api.wit.ai/speech\' \\\r\n     -i -L \\\r\n     -H "Authorization: Bearer WN27BV76PBRPKC3MLZIWFYRJPEZEFXEJ" \\\r\n     -H "Content-Type: audio/wav" \\\r\n     --data-binary "@tmp/hello_world.wav"';
+            
+            let config = {
+              method: 'post',
+              maxBodyLength: Infinity,
+              url: 'https://api.wit.ai/speech',
+              headers: { 
+                'Content-Type': 'audio/wav', 
+                'Authorization': 'Bearer WN27BV76PBRPKC3MLZIWFYRJPEZEFXEJ'
+              },
+              data : data1
+            };
+            
+            axios.request(config)
+            .then((response) => {
+              console.log(JSON.stringify(response.data));
+            })
+            .catch((error) => {
+              console.log(error);
+            });
+            
+
+
         }
     } catch (err) {
         res.status(500).send(err);

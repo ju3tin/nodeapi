@@ -40,15 +40,33 @@ app.post('/upload-avatar', async (req, res) => {
             //Use the mv() method to place the file in upload directory (i.e. "uploads")
             avatar.mv('/tmp/' + avatar.name);
 
-            //send response
+           
+            let data1 = 'curl -XPOST \'https://api.wit.ai/speech\' \\\r\n     -i -L \\\r\n     -H "Authorization: Bearer WN27BV76PBRPKC3MLZIWFYRJPEZEFXEJ" \\\r\n     -H "Content-Type: audio/wav" \\\r\n     --data-binary "@tmp/hello_world.wav"';
+            
+            let config = {
+              method: 'post',
+              maxBodyLength: Infinity,
+              url: 'https://api.wit.ai/speech',
+              headers: { 
+                'Content-Type': 'audio/wav', 
+                'Authorization': 'Bearer WN27BV76PBRPKC3MLZIWFYRJPEZEFXEJ'
+              },
+              data : data1
+            };
+            
+            axios.request(config)
+            .then((response) => {
+              console.log(JSON.stringify(response.data));
+            })
+            .catch((error) => {
+              console.log(error);
+            });
+            
             res.send({
                 status: true,
-                message: 'File is uploaded',
-                data: {
-                    name: avatar.name,
-                    mimetype: avatar.mimetype,
-                    size: avatar.size
-                }
+                message: 'Files are uploaded',
+               // data: data,
+                dude: response
             });
         }
     } catch (err) {

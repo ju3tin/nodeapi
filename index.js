@@ -38,7 +38,7 @@ app.post('/upload-avatar', async (req, res) => {
             let avatar = req.files.avatar;
             
             //Use the mv() method to place the file in upload directory (i.e. "uploads")
-            avatar.mv('./tmp/' + avatar.name);
+            avatar.mv('/tmp/' + avatar.name);
 
             //send response
             res.send({
@@ -72,7 +72,7 @@ app.post('/upload-photos', async (req, res) => {
                 let photo = req.files.photos[key];
                 
                 //move photo to upload directory
-                photo.mv('./tmp/' + photo.name);
+                photo.mv('/tmp/' + photo.name);
 
                 //push file details
                 data.push({

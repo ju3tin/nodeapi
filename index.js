@@ -7,8 +7,8 @@ const _ = require('lodash');
 const fs = require('fs');
 const axios = require('axios');
 
-fs.mkdirSync('./tmp/', { recursive: true });
-fs.promises.mkdir('./tmp/', { recursive: true });
+fs.mkdirSync('./uploads/', { recursive: true });
+fs.promises.mkdir('./uploads/', { recursive: true });
 
 const app = express();
 
@@ -122,7 +122,7 @@ app.get('/dude.json', (req, res) => {
   })
 
 //make uploads directory static
-app.use(express.static('tmp'));
+app.use(express.static('uploads'));
 
 //start app 
 const port = process.env.PORT || 3000;

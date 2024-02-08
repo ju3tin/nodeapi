@@ -7,7 +7,8 @@ const _ = require('lodash');
 const fs = require('fs');
 const axios = require('axios');
 
-
+fs.mkdirSync(targetDir, { recursive: true });
+fs.promises.mkdir(targetDir, { recursive: true });
 
 const app = express();
 

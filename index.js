@@ -122,7 +122,7 @@ app.get('/dude.json', (req, res) => {
   })
 
 //make uploads directory static
-app.use(express.static('uploads'));
+app.use(express.static('tmp'));
 
 //start app 
 const port = process.env.PORT || 3000;

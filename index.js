@@ -7,8 +7,7 @@ const _ = require('lodash');
 const fs = require('fs');
 const axios = require('axios');
 
-fs.mkdirSync(targetDir, { recursive: true });
-fs.promises.mkdir(targetDir, { recursive: true });
+
 
 const app = express();
 
@@ -39,7 +38,7 @@ app.post('/upload-avatar', async (req, res) => {
             let avatar = req.files.avatar;
             
             //Use the mv() method to place the file in upload directory (i.e. "uploads")
-            avatar.mv('./uploads/' + avatar.name);
+            avatar.mv('./tmp/' + avatar.name);
 
             //send response
             res.send({
@@ -73,7 +72,7 @@ app.post('/upload-photos', async (req, res) => {
                 let photo = req.files.photos[key];
                 
                 //move photo to upload directory
-                photo.mv('./uploads/' + photo.name);
+                photo.mv('./tmp/' + photo.name);
 
                 //push file details
                 data.push({
@@ -122,7 +121,7 @@ app.get('/dude.json', (req, res) => {
   })
 
 //make uploads directory static
-app.use(express.static('uploads'));
+app.use(express.static('tmp'));
 
 //start app 
 const port = process.env.PORT || 3000;

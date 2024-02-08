@@ -4,7 +4,11 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const _ = require('lodash');
+const fs = require('fs');
 const axios = require('axios');
+
+fs.mkdirSync('./uploads/', { recursive: true });
+fs.promises.mkdir('./uploads/', { recursive: true });
 
 const app = express();
 

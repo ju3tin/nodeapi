@@ -6,8 +6,21 @@ const morgan = require('morgan');
 const _ = require('lodash');
 const fs = require('fs');
 const axios = require('axios');
+const multer = require('multer');
+const path = require('path');
+
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+      cb(null, './tmp'); // Save files to a tmp folder
+    },
+    filename: function (req, file, cb) {
+      cb(null, file.originalname);
+    }
+  });
+  
 
 
+const upload = multer({ storage: storage });
 
 const app = express();
 
@@ -24,6 +37,7 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(morgan('dev'));
+
 
 // upoad single file
 
@@ -60,6 +74,27 @@ app.post('/update', async (req, res) => {
       }
 })
 
+app.post('/upload', upload.single('file'), async (req, res) => {
+    try {
+      // Read the file from the temporary folder
+      const filePath = path.join(__dirname, 'tmp', req.files.filename);
+      const fileData = fs.readFileSync(filePath);
+  
+      // Send the file to another API
+      const response = await axios.post('https://example.com/api', fileData, {
+        headers: {
+          'Content-Type': 'application/octet-stream' // Set proper content type
+        }
+      });
+  
+      // Respond with the response from the API
+      res.json(response.data);
+    } catch (error) {
+      console.error(error);
+      res.status(500).send('Internal Server Error');
+    }
+  });
+
 app.post('/upload-avatar', async (req, res) => {
     try {
         if(!req.files) {
@@ -74,6 +109,31 @@ app.post('/upload-avatar', async (req, res) => {
             //Use the mv() method to place the file in upload directory (i.e. "uploads")
             avatar.mv('./tmp/' + avatar.name);
 
+            let data = '/tmp/' + avatar.name;
+
+            const filePath = path.join(__dirname, 'tmp');
+    const fileData = fs.readFileSync(filePath);
+            
+            let config = {
+              method: 'post',
+              maxBodyLength: Infinity,
+              url: 'https://api.wit.ai/speech',
+              headers: { 
+                'Content-Type': 'audio/wav',
+                'Authorization': 'Bearer WN27BV76PBRPKC3MLZIWFYRJPEZEFXEJ'
+              },
+              data : filePath+'hello_world.wav'
+            };
+            
+            axios.request(config)
+            .then((response) => {
+              console.log(JSON.stringify(response.data)+'this is '+avatar.name);
+            })
+            .catch((error) => {
+              console.log(error);
+            });
+            
+
             //send response
             res.send({
                 status: true,
@@ -84,6 +144,8 @@ app.post('/upload-avatar', async (req, res) => {
                     size: avatar.size
                 }
             });
+          
+       
         }
     } catch (err) {
         res.status(500).send(err);

@@ -68,7 +68,7 @@ axios.request(config)
             res.send({
                 status: true,
                 message: 'File is uploaded',
-                dude: JSON.stringify(response.data),
+                dude: response,
                 data: {
                     name: avatar.name,
                     mimetype: avatar.mimetype,

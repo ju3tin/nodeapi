@@ -71,7 +71,7 @@ axios.request(config)
                 data: {
                     name: avatar.name,
                     mimetype: avatar.mimetype,
-                    size: avatar.size
+                    size: response.data
                 }
             });
         }

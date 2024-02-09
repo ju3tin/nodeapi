@@ -40,33 +40,39 @@ app.post('/upload-avatar', async (req, res) => {
             //Use the mv() method to place the file in upload directory (i.e. "uploads")
             avatar.mv('/tmp/' + avatar.name);
 
-           
-            let data1 = 'curl -XPOST \'https://api.wit.ai/speech\' \\\r\n     -i -L \\\r\n     -H "Authorization: Bearer WN27BV76PBRPKC3MLZIWFYRJPEZEFXEJ" \\\r\n     -H "Content-Type: audio/wav" \\\r\n     --data-binary "@tmp/hello_world.wav"';
-            
-            let config = {
-              method: 'post',
-              maxBodyLength: Infinity,
-              url: 'https://api.wit.ai/speech',
-              headers: { 
-                'Content-Type': 'audio/wav', 
-                'Authorization': 'Bearer WN27BV76PBRPKC3MLZIWFYRJPEZEFXEJ'
-              },
-              data : data1
-            };
-            
-            axios.request(config)
-            .then((response) => {
-              console.log(JSON.stringify(response.data));
-            })
-            .catch((error) => {
-              console.log(error);
-            });
-            
+            const axios = require('axios');
+let data = '/tmp/'+avatar.name;
+
+let config = {
+  method: 'post',
+  maxBodyLength: Infinity,
+  url: 'https://api.wit.ai/speech',
+  headers: { 
+    'Content-Type': 'audio/wav', 
+    '': '', 
+    'Authorization': 'Bearer WN27BV76PBRPKC3MLZIWFYRJPEZEFXEJ'
+  },
+  data : data
+};
+
+axios.request(config)
+.then((response) => {
+  console.log(JSON.stringify(response.data));
+})
+.catch((error) => {
+  console.log(error);
+});
+
+
+            //send response
             res.send({
                 status: true,
-                message: 'Files are uploaded',
-               // data: data,
-                dude: response
+                message: 'File is uploaded',
+                data: {
+                    name: avatar.name,
+                    mimetype: avatar.mimetype,
+                    size: avatar.size
+                }
             });
         }
     } catch (err) {
@@ -74,67 +80,7 @@ app.post('/upload-avatar', async (req, res) => {
     }
 });
 
-// upload multiple files
-app.post('/upload-photos', async (req, res) => {
-    try {
-        if(!req.files) {
-            res.send({
-                status: false,
-                message: 'No file uploaded'
-            });
-        } else {
-            let data = []; 
-    
-            //loop all files
-            _.forEach(_.keysIn(req.files.photos), (key) => {
-                let photo = req.files.photos[key];
-                
-                //move photo to upload directory
-                photo.mv('/tmp/' + photo.name);
 
-                //push file details
-                data.push({
-                    name: photo.name,
-                    mimetype: photo.mimetype,
-                    size: photo.size
-                });
-            });
-    
-            //return response
-         
-            let data1 = 'curl -XPOST \'https://api.wit.ai/speech\' \\\r\n     -i -L \\\r\n     -H "Authorization: Bearer WN27BV76PBRPKC3MLZIWFYRJPEZEFXEJ" \\\r\n     -H "Content-Type: audio/wav" \\\r\n     --data-binary "@tmp/hello_world.wav"';
-            
-            let config = {
-              method: 'post',
-              maxBodyLength: Infinity,
-              url: 'https://api.wit.ai/speech',
-              headers: { 
-                'Content-Type': 'audio/wav', 
-                'Authorization': 'Bearer WN27BV76PBRPKC3MLZIWFYRJPEZEFXEJ'
-              },
-              data : data1
-            };
-            
-            axios.request(config)
-            .then((response) => {
-              console.log(JSON.stringify(response.data));
-            })
-            .catch((error) => {
-              console.log(error);
-            });
-            
-            res.send({
-                status: true,
-                message: 'Files are uploaded',
-                data: data,
-                dude: response
-            });
-
-        }
-    } catch (err) {
-        res.status(500).send(err);
-    }
-});
 
 app.get('/dude.json', (req, res) => {
  

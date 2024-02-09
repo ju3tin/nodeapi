@@ -2,10 +2,10 @@
   "name": "files-upload",
   "version": "1.0.0",
   "description": "",
-  "main": "upload.js",
+  "main": "index3.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node upload.js"
+    "start": "node index3.js"
   },
   "keywords": [],
   "author": "",

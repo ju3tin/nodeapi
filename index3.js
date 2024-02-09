@@ -29,17 +29,28 @@ app.use(morgan('dev'));
 
 app.post('/update', async (req, res) => {
     try {
-        // Extract the file content from the request body
-        const fileContent = req.body;
+        // Ensure the request is a POST request
+        if (req.method !== 'POST') {
+          res.status(405).json({ error: 'Method Not Allowed' });
+          return;
+        }
     
-        // Generate a unique filename or use a predefined filename
-        const filename = 'uploaded_file.txt'; // You can customize the filename as needed
+        // Check if the request contains a file
+        if (!req.body || !req.body.file) {
+          res.status(400).json({ error: 'No file provided in the request body' });
+          return;
+        }
     
-        // Create a temporary file path
+        // Generate a unique filename for the temporary file
+        const filename = `upload_${Date.now()}_${Math.floor(Math.random() * 1000)}.txt`;
+        
+        // Create the path to the temporary file in the /tmp directory
         const tempFilePath = path.join('/tmp', filename);
     
         // Write the file content to the temporary file
-        fs.writeFileSync(tempFilePath, fileContent);
+        fs.writeFileSync(tempFilePath, req.body.file, { encoding: 'utf-8' });
+    
+        // Do something with the temporary file, such as processing it or sending it to another service
     
         // Respond with a success message
         res.status(200).json({ message: 'File uploaded successfully', filename });

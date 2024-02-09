@@ -58,6 +58,9 @@ let config = {
 axios.request(config)
 .then((response) => {
   console.log(JSON.stringify(response.data));
+  res.send({
+    status: true
+  })
 })
 .catch((error) => {
   console.log(error);
@@ -65,16 +68,15 @@ axios.request(config)
 
 
             //send response
-            res.send({
+           /* res.send({
                 status: true,
                 message: 'File is uploaded',
-                dude: response,
                 data: {
                     name: avatar.name,
                     mimetype: avatar.mimetype,
                     size: avatar.size
                 }
-            });
+            });*/
         }
     } catch (err) {
         res.status(500).send(err);

@@ -30,7 +30,7 @@ app.use(morgan('dev'));
 app.post('/update', async (req, res) => {
     try {
         // Extract the file content from the request body
-        const fileContent = req.body;
+        const fileContent = req.body.file;
     
         // Generate a unique filename or use a predefined filename
         const filename = 'uploaded_file.txt'; // You can customize the filename as needed

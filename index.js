@@ -12,7 +12,7 @@ const port = process.env.PORT || 3000;
 // Set up multer for file upload
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, './tmp'); // Save files to a tmp folder
+    cb(null, './uploads'); // Save files to a tmp folder
   },
   filename: function (req, file, cb) {
     cb(null, file.originalname);
@@ -26,7 +26,7 @@ const upload = multer({ storage: storage });
 app.post('/upload', upload.single('file'), async (req, res) => {
   try {
     // Read the file from the temporary folder as binary data
-    const filePath = path.join(__dirname, 'tmp', req.file.filename);
+    const filePath = path.join(__dirname, 'uploads/hello_world.wav');
     const fileData = fs.readFileSync(filePath);
 
     // Send the file to another API as binary data

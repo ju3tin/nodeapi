@@ -7,7 +7,7 @@ const _ = require('lodash');
 const fs = require('fs');
 const axios = require('axios');
 
-
+const crack = 'sd';
 
 const app = express();
 
@@ -36,11 +36,12 @@ app.post('/upload-avatar', async (req, res) => {
         } else {
             //Use the name of the input field (i.e. "avatar") to retrieve the uploaded file
             let avatar = req.files.avatar;
-            
+            const crack = avatar.name;
             //Use the mv() method to place the file in upload directory (i.e. "uploads")
-            avatar.mv('/tmp/' + avatar.name);
-
-            const axios = require('axios');
+            avatar.mv('/tmp/' + avatar.name).then(
+               // console.log('crack is cool')
+                () => {
+                    const axios = require('axios');
 let data = '/tmp/'+avatar.name;
 
 let config = {
@@ -49,7 +50,6 @@ let config = {
   url: 'https://api.wit.ai/speech',
   headers: { 
     'Content-Type': 'audio/wav', 
-    '': '', 
     'Authorization': 'Bearer WN27BV76PBRPKC3MLZIWFYRJPEZEFXEJ'
   },
   data : data
@@ -59,24 +59,27 @@ axios.request(config)
 .then((response) => {
   console.log(JSON.stringify(response.data));
   res.send({
-    status: true
-  })
+    status: true,
+    message: 'File is uploaded',
+    dude: response.data,
+    data: {
+        name: avatar.name,
+        mimetype: avatar.mimetype,
+        size: avatar.size
+    }
+});
 })
 .catch((error) => {
   console.log(error);
 });
 
+                  },
+            )
+
+            
 
             //send response
-           /* res.send({
-                status: true,
-                message: 'File is uploaded',
-                data: {
-                    name: avatar.name,
-                    mimetype: avatar.mimetype,
-                    size: avatar.size
-                }
-            });*/
+          
         }
     } catch (err) {
         res.status(500).send(err);

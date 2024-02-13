@@ -62,7 +62,7 @@ app.get('/why', (req, res) => {
 
 } )
 
-app.post('/why', async (req, res) => {
+app.post('/why', upload.single('audioData'), async (req, res) => {
 
 
  const { audioData } = req.body;

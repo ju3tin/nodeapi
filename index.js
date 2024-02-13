@@ -26,7 +26,7 @@ const upload = multer({ storage: storage });
 
 app.post('/upload1', upload.single('file'), async (req, res) => {
    try {
-  const filePath = path.join(__dirname, 'uploads/hello_world.wav');
+  const filePath = path.join(__dirname, '/uploads/hello_world.wav');
   const fileData = fs.readFileSync(filePath);
   let data = filePath;
   let config = {

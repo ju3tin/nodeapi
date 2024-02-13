@@ -90,6 +90,8 @@ app.post('/why', async (req, res) => {
   // check in the promise for the completion of call to witai
   parseSpeech.then((data) => {
       console.log(data);
+     res.write(data);
+    res.send();
   })
   .catch((err) => {
       console.log(err);

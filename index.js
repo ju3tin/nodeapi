@@ -39,8 +39,10 @@ app.post('/upload', upload.single('file'), async (req, res) => {
     });
 
     // Respond with the response from the API
-    res.json('dude');
-    fs.unlinkSync(filePath);
+    //res.json('dude');
+    
+    //fs.unlinkSync(filePath);
+    res.send('dude')
   } catch (error) {
     console.error(error);
     res.status(500).send('Internal Server Error');

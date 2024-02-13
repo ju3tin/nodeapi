@@ -29,6 +29,21 @@ app.post('/upload1', upload.single('file'), async (req, res) => {
   const filePath = path.join(__dirname, 'uploads/hello_world.wav');
   const fileData = fs.readFileSync(filePath);
   let data = filePath;
+  let config = {
+  method: 'post',
+  maxBodyLength: Infinity,
+  url: 'https://api.wit.ai/speech',
+  headers: { 
+    'Content-Type': 'audio/wav', 
+    'Authorization': 'Bearer WN27BV76PBRPKC3MLZIWFYRJPEZEFXEJ'
+  },
+  data : data
+};
+
+axios.request(config)
+.then((response) => {
+  console.log(JSON.stringify(response.data));
+});
   res.write(`{"dude": "dude what the fuck"}`);
   res.send();
       } catch (error) {

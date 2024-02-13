@@ -29,7 +29,8 @@ app.post('/upload1', upload.single('file'), async (req, res) => {
   res.write('dude what the fuck');
   res.send();
       } catch (error) {
-        console.error('Error parsing JSON data:', error);
+        console.error('Error parsing JSON data:', error);   
+    res.status(500).send('Internal Server Error');
     }
 });
 

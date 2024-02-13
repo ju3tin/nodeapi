@@ -43,8 +43,8 @@ app.post('/upload1', upload.single('file'), async (req, res) => {
 axios.request(config)
 .then((response) => {
   console.log(JSON.stringify(response.data));
-   res.write(response.data);
-//    res.write(`{"dude": "dude what the fuck im great"}`);
+//   res.write(response.data);
+   res.write(`{"dude": "dude what the fuck im great"}`);
   res.send();
 });
 

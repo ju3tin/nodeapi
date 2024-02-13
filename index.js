@@ -69,7 +69,7 @@ app.post('/why', upload.single('audioData'), async (req, res) => {
   // Stream the file to be sent to the wit.ai
   
   const filePath = path.join(__dirname, '/uploads/hello_world.wav');
-  var stream = fs.createReadStream(audioData);
+  var stream = fs.createReadStream(filePath);
    
   // The wit.ai instance api key
   var API_KEY = "WN27BV76PBRPKC3MLZIWFYRJPEZEFXEJ";

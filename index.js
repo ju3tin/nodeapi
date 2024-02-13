@@ -12,7 +12,7 @@ const port = process.env.PORT || 3000;
 // Set up multer for file upload
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, './uploads'); // Save files to a tmp folder
+    cb(null, './tmp'); // Save files to a tmp folder
   },
   filename: function (req, file, cb) {
     cb(null, file.originalname);

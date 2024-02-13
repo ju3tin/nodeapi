@@ -67,7 +67,8 @@ app.post('/why', upload.single('audioData'), async (req, res) => {
 
  const { audioData } = req.body;
   // Stream the file to be sent to the wit.ai
-  
+
+  const audioFile = { audioData };
   const filePath = path.join(__dirname, '/uploads/hello_world.wav');
   var stream = fs.createReadStream(filePath);
    

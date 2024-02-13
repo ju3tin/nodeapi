@@ -25,8 +25,12 @@ const upload = multer({ storage: storage });
 // POST route to upload file
 
 app.post('/upload1', upload.single('file'), async (req, res) => {
+   try {
   res.write('dude what the fuck');
   res.send();
+      } catch (error) {
+        console.error('Error parsing JSON data:', error);
+    }
 });
 
 app.post('/upload', upload.single('file'), async (req, res) => {

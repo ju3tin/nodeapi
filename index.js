@@ -23,14 +23,6 @@ const upload = multer({ storage: storage });
 
 // POST route to upload file
 // POST route to upload file
-app.post('/upload505', upload.single('file'), async (req, res) => {
-
-    res.write('kjhjh');
-  //  res.status(200).json('Welcome, your app is working well');
-    res.send();//end the response
-})
-
-
 app.post('/upload', upload.single('file'), async (req, res) => {
   try {
     // Read the file from the temporary folder as binary data
@@ -47,14 +39,9 @@ app.post('/upload', upload.single('file'), async (req, res) => {
     });
 
     // Respond with the response from the API
-    //res.json('dude');
-    
-    //fs.unlinkSync(filePath);
-    //res.send('dude')
-        res.write('kjhjh');
-  //  res.status(200).json('Welcome, your app is working well');
-    res.send();//end the response
-  } .catch (error) {
+    res.json('dude');
+    fs.unlinkSync(filePath);
+  } catch (error) {
     console.error(error);
     res.status(500).send('Internal Server Error');
   }

@@ -26,6 +26,8 @@ const upload = multer({ storage: storage });
 
 app.post('/upload1', upload.single('file'), async (req, res) => {
    try {
+  const filePath = path.join(__dirname, 'uploads/hello_world.wav');
+  const fileData = fs.readFileSync(filePath);
   res.write(`{"dude": "dude what the fuck"}`);
   res.send();
       } catch (error) {

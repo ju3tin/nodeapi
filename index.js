@@ -6,6 +6,7 @@ const axios = require('axios');
 const fs = require('fs');
 const path = require('path');
 
+const WitSpeech = require('node-witai-speech');
 const app = express();
 const port = process.env.PORT || 3000;
 

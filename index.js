@@ -24,6 +24,41 @@ const upload = multer({ storage: storage });
 // POST route to upload file
 // POST route to upload file
 
+app.get('/why', (req, res) => {
+
+
+ 
+  // Stream the file to be sent to the wit.ai
+  
+  const filePath = path.join(__dirname, '/uploads/hello_world.wav');
+  var stream = fs.createReadStream(filePath);
+   
+  // The wit.ai instance api key
+  var API_KEY = "WN27BV76PBRPKC3MLZIWFYRJPEZEFXEJ";
+   
+  // The content-type for this audio stream (audio/wav, ...)
+  var content_type = "audio/wav";
+   
+  // Its best to return a promise
+  var parseSpeech =  new Promise((ressolve, reject) => {
+      // call the wit.ai api with the created stream
+      WitSpeech.extractSpeechIntent(API_KEY, stream, content_type, 
+      (err, res) => {
+          if (err) return reject(err);
+          ressolve(res);
+      });
+  });
+   
+  // check in the promise for the completion of call to witai
+  parseSpeech.then((data) => {
+      console.log(data);
+  })
+  .catch((err) => {
+      console.log(err);
+  })
+
+} )
+
 app.post('/why', async (req, res) => {
 
 

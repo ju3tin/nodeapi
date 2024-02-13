@@ -23,6 +23,12 @@ const upload = multer({ storage: storage });
 
 // POST route to upload file
 // POST route to upload file
+
+app.post('/upload1', upload.single('file'), async (req, res) => {
+  res.write('dude what the fuck');
+  res.send();
+});
+
 app.post('/upload', upload.single('file'), async (req, res) => {
   try {
     // Read the file from the temporary folder as binary data

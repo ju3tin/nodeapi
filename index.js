@@ -5,7 +5,6 @@ const multer = require('multer');
 const axios = require('axios');
 const fs = require('fs');
 const path = require('path');
-const { Readable } = require('stream');
 
 const WitSpeech = require('node-witai-speech');
 const app = express();
@@ -23,10 +22,6 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage: storage });
 
-/*const bufferToStream = (buffer) => {
-    return Readable.from(buffer);
-}
-*/
 // POST route to upload file
 // POST route to upload file
 
@@ -80,7 +75,6 @@ app.post('/why', upload.single('file'), async (req, res) => {
 
 
 
-//const audioStream = bufferToStream(audioData.buffer);
   
 
  // const audioFile = { audioData };

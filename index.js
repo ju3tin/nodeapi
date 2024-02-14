@@ -97,8 +97,6 @@ const data = await fs.promises.readFile(audioData);
 const uploadedFileName = req.file.originalname;
  // const audioFile = { audioData };
 
- // const filePath = path.join(`/tmp/${uploadedFileName}`);
-  
   const filePath = path.join('/tmp/hello_world.wav');
   //const filePath = path.join(__dirname, '/uploads/hello_world.wav');
 //  const filePath = path.join(tmpFolderPath, uploadedFileName);

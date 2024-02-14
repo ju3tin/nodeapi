@@ -94,9 +94,9 @@ const data = await fs.promises.readFile(audioData);
     // Write the file content to the temporary file
     fs.writeFileSync(tempFilePath1, req.file, { encoding: 'utf-8' });
   */
-
+const uploadedFileName = req.file.originalname;
  // const audioFile = { audioData };
-  const filePath = path.join(__dirname, '/uploads/hello_world.wav');
+  const filePath = path.join(__dirname, '/tmp/'+uploadedFileName);
   var stream = fs.createReadStream(filePath);
    
   // The wit.ai instance api key

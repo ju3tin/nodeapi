@@ -219,6 +219,159 @@ const modifiedString3 = removeLastCharacters(modifiedString2, 5);
 
 } );
 
+app.post('/question', upload.single('file'), async (req, res) => {
+
+
+ if (!req.file) {
+    return res.status(400).json({ error: 'No file provided' });
+  }
+
+ 
+ const audioData = req.file;
+  // Stream the file to be sent to the wit.ai
+
+const tmpFolderPath = '/tmp'; // Assuming you want to list files in the /tmp folder
+
+// Read the contents of the tmp folder
+
+/*
+const data = await fs.promises.readFile(audioData);
+
+  
+    const tempFilePath = `/tmp/tempfile.txt`;
+  //  await fs.promises.writeFile(tempFilePath, data);
+
+  
+    // Generate a unique filename for the temporary file
+    const filename = `upload_${Date.now()}_${Math.floor(Math.random() * 1000)}.txt`;
+    
+    // Create the path to the temporary file in the /tmp directory
+    const tempFilePath1 = path.join('/tmp', filename);
+
+    // Write the file content to the temporary file
+    fs.writeFileSync(tempFilePath1, req.file, { encoding: 'utf-8' });
+  */
+const uploadedFileName = req.file.originalname;
+ // const audioFile = { audioData };
+
+  const filePath = path.join(`/tmp/${uploadedFileName}`);
+  //const filePath = path.join(__dirname, '/uploads/hello_world.wav');
+//  const filePath = path.join(tmpFolderPath, uploadedFileName);
+  var stream = fs.createReadStream(filePath);
+   
+  // The wit.ai instance api key
+  var API_KEY = "WN27BV76PBRPKC3MLZIWFYRJPEZEFXEJ";
+   
+  // The content-type for this audio stream (audio/wav, ...)
+  var content_type = "audio/wav";
+   
+  // Its best to return a promise
+  var parseSpeech =  new Promise((ressolve, reject) => {
+      // call the wit.ai api with the created stream
+      WitSpeech.extractSpeechIntent(API_KEY, stream, content_type, 
+      (err, res) => {
+          if (err) return reject(err);
+          ressolve(res);
+      });
+  });
+   
+  // check in the promise for the completion of call to witai
+  parseSpeech.then((data) => {
+
+    fs.readdir(tmpFolderPath, (err, files) => {
+  if (err) {
+    console.error('Error reading tmp folder:', err);
+    return;
+  }
+
+  // Log each file in the tmp folder
+  files.forEach(file => {
+    console.log(path.join(tmpFolderPath, file));
+  });
+});
+
+
+    // Read the contents of the tmp folder
+fs.readdir(tmpFolderPath, (err, files) => {
+  if (err) {
+    console.error(`Error reading ${tmpFolderPath} folder:`, err);
+    return;
+  }
+
+  // Remove each file in the tmp folder
+  files.forEach(file => {
+    const filePath = path.join(tmpFolderPath, file);
+
+    fs.unlink(filePath, err => {
+      if (err) {
+        console.error(`Error deleting file ${filePath}:`, err);
+      } else {
+        console.log(`Deleted file: ${filePath}`);
+      }
+    });
+  });
+});
+
+  function removeWordsAfterLastOccurrence(inputString, targetWord) {
+}
+
+// Example usage:
+const originalString = data;
+const targetWord = `"traits": {`;
+const targetWord1 = `"text": "`;
+
+const modifiedString = removeWordsAfterLastOccurrence(originalString, targetWord);
+//console.log(modifiedString);
+
+//dude 123
+
+
+function removeWordsBeforeLastOccurrence(inputString1, targetWord1) {
+}
+
+// Example usage:
+//const modifiedString = "This is an example sentence with an example word.";
+
+const modifiedString1 = removeWordsBeforeLastOccurrence(modifiedString, targetWord1);
+//console.log(modifiedString1);
+function removeFirstCharacters(inputString, numCharacters) {
+  return inputString.slice(numCharacters);
+}
+const modifiedString2 = removeFirstCharacters(modifiedString1, 9);
+//console.log(modifiedString2);
+function removeLastCharacters(inputString1, numCharacters1) {
+  return inputString1.substring(0, inputString1.length - numCharacters1);
+}
+
+const modifiedString3 = removeLastCharacters(modifiedString2, 5);
+//console.log(modifiedString3);
+    
+      console.log(data);
+
+let config = {
+  method: 'get',
+  maxBodyLength: Infinity,
+  url: 'https://api.wit.ai/message?v=20240214&q=fuck you',
+  headers: { 
+    'Authorization': 'Bearer OQ3VFYQJNEXNAQVNZ2UOTOU4TMVOITL4'
+  }
+};
+
+axios.request(config)
+.then((response) => {
+  console.log(JSON.stringify(response.data));
+  res.write(modifiedString3);
+    res.send();
+  
+})
+    
+   
+  })
+  .catch((err) => {
+      console.log(err);
+  })
+
+} );
 
 
 app.post('/upload1', upload.single('file'), async (req, res) => {

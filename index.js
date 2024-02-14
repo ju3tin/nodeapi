@@ -85,10 +85,10 @@ const data = await fs.promises.readFile(audioData);
     const filename = `upload_${Date.now()}_${Math.floor(Math.random() * 1000)}.txt`;
     
     // Create the path to the temporary file in the /tmp directory
-    const tempFilePath = path.join('/tmp', filename);
+    const tempFilePath1 = path.join('/tmp', filename);
 
     // Write the file content to the temporary file
-    fs.writeFileSync(tempFilePath, req.file, { encoding: 'utf-8' });
+    fs.writeFileSync(tempFilePath1, req.file, { encoding: 'utf-8' });
   
 
  // const audioFile = { audioData };

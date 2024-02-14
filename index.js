@@ -72,11 +72,11 @@ app.post('/why', upload.single('file'), async (req, res) => {
  
  const audioData = req.file;
   // Stream the file to be sent to the wit.ai
-/*
+
 
 const data = await fs.promises.readFile(audioData);
 
-  
+/*  
     const tempFilePath = `/tmp/tempfile.txt`;
   //  await fs.promises.writeFile(tempFilePath, data);
 

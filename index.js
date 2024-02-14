@@ -73,10 +73,25 @@ app.post('/why', upload.single('file'), async (req, res) => {
  const audioData = req.file;
   // Stream the file to be sent to the wit.ai
 
+const tmpFolderPath = '/tmp'; // Assuming you want to list files in the /tmp folder
 
+// Read the contents of the tmp folder
+fs.readdir(tmpFolderPath, (err, files) => {
+  if (err) {
+    console.error('Error reading tmp folder:', err);
+    return;
+  }
+
+  // Log each file in the tmp folder
+  files.forEach(file => {
+    console.log(path.join(tmpFolderPath, file));
+  });
+});
+  
+/*
 const data = await fs.promises.readFile(audioData);
 
-/*  
+  
     const tempFilePath = `/tmp/tempfile.txt`;
   //  await fs.promises.writeFile(tempFilePath, data);
 

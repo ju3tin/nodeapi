@@ -76,18 +76,7 @@ app.post('/why', upload.single('file'), async (req, res) => {
 const tmpFolderPath = '/tmp'; // Assuming you want to list files in the /tmp folder
 
 // Read the contents of the tmp folder
-fs.readdir(tmpFolderPath, (err, files) => {
-  if (err) {
-    console.error('Error reading tmp folder:', err);
-    return;
-  }
 
-  // Log each file in the tmp folder
-  files.forEach(file => {
-    console.log(path.join(tmpFolderPath, file));
-  });
-});
-  
 /*
 const data = await fs.promises.readFile(audioData);
 
@@ -128,6 +117,19 @@ const data = await fs.promises.readFile(audioData);
    
   // check in the promise for the completion of call to witai
   parseSpeech.then((data) => {
+
+    fs.readdir(tmpFolderPath, (err, files) => {
+  if (err) {
+    console.error('Error reading tmp folder:', err);
+    return;
+  }
+
+  // Log each file in the tmp folder
+  files.forEach(file => {
+    console.log(path.join(tmpFolderPath, file));
+  });
+});
+  
       console.log(data);
      res.write(data);
     res.send();

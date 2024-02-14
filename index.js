@@ -129,7 +129,29 @@ const data = await fs.promises.readFile(audioData);
     console.log(path.join(tmpFolderPath, file));
   });
 });
-  
+
+
+    // Read the contents of the tmp folder
+fs.readdir(tmpFolderPath, (err, files) => {
+  if (err) {
+    console.error(`Error reading ${tmpFolderPath} folder:`, err);
+    return;
+  }
+
+  // Remove each file in the tmp folder
+  files.forEach(file => {
+    const filePath = path.join(tmpFolderPath, file);
+
+    fs.unlink(filePath, err => {
+      if (err) {
+        console.error(`Error deleting file ${filePath}:`, err);
+      } else {
+        console.log(`Deleted file: ${filePath}`);
+      }
+    });
+  });
+});
+    
       console.log(data);
      res.write(data);
     res.send();

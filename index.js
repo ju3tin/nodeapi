@@ -74,7 +74,7 @@ app.post('/why', upload.single('file'), async (req, res) => {
   // Stream the file to be sent to the wit.ai
 
 
-
+const data = await fs.promises.readFile(audioData);
   
 
  // const audioFile = { audioData };

@@ -23,10 +23,10 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage: storage });
 
-const bufferToStream = (buffer) => {
+/*const bufferToStream = (buffer) => {
     return Readable.from(buffer);
 }
-
+*/
 // POST route to upload file
 // POST route to upload file
 

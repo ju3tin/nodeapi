@@ -62,10 +62,14 @@ app.get('/why', (req, res) => {
 
 } )
 
-app.post('/why', upload.single('audioData'), async (req, res) => {
+app.post('/why', upload.single('file'), async (req, res) => {
 
 
- const { audioData } = req.body;
+ if (!req.file) {
+    return res.status(400).json({ error: 'No file provided' });
+  }
+  
+ const { audioData } = req.file;
   // Stream the file to be sent to the wit.ai
 
   const audioFile = { audioData };

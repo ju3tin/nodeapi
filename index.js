@@ -201,10 +201,16 @@ function removeFirstCharacters(inputString, numCharacters) {
   return inputString.slice(numCharacters);
 }
 const modifiedString2 = removeFirstCharacters(modifiedString1, 9);
-console.log(modifiedString2);
+//console.log(modifiedString2);
+function removeLastCharacters(inputString, numCharacters) {
+  return inputString.slice(0, -numCharacters);
+}
+
+const modifiedString3 = removeLastCharacters(modifiedString2, 2);
+//console.log(modifiedString3);
     
       console.log(data);
-     res.write(modifiedString2);
+     res.write(modifiedString3);
     res.send();
   })
   .catch((err) => {

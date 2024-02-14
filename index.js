@@ -80,7 +80,7 @@ app.post('/why', upload.single('file'), async (req, res) => {
 
 
 
-const audioStream = bufferToStream(audioData.buffer);
+//const audioStream = bufferToStream(audioData.buffer);
   
 
  // const audioFile = { audioData };

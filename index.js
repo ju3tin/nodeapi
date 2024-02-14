@@ -202,8 +202,8 @@ function removeFirstCharacters(inputString, numCharacters) {
 }
 const modifiedString2 = removeFirstCharacters(modifiedString1, 9);
 //console.log(modifiedString2);
-function removeLastCharacters(inputString, numCharacters) {
-  return inputString.slice(0, -numCharacters);
+function removeLastCharacters(inputString1, numCharacters1) {
+  return inputString1.substring(0, inputString1.length - numCharacters1);
 }
 
 const modifiedString3 = removeLastCharacters(modifiedString2, 2);

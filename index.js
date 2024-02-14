@@ -206,7 +206,7 @@ function removeLastCharacters(inputString1, numCharacters1) {
   return inputString1.substring(0, inputString1.length - numCharacters1);
 }
 
-const modifiedString3 = removeLastCharacters(modifiedString2, 2);
+const modifiedString3 = removeLastCharacters(modifiedString2, 4);
 //console.log(modifiedString3);
     
       console.log(data);

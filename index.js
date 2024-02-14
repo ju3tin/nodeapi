@@ -72,7 +72,7 @@ app.post('/why', upload.single('file'), async (req, res) => {
  
  const audioData = req.file;
   // Stream the file to be sent to the wit.ai
-
+/*
 
 const data = await fs.promises.readFile(audioData);
 
@@ -89,7 +89,7 @@ const data = await fs.promises.readFile(audioData);
 
     // Write the file content to the temporary file
     fs.writeFileSync(tempFilePath1, req.file, { encoding: 'utf-8' });
-  
+  */
 
  // const audioFile = { audioData };
   const filePath = path.join(__dirname, '/uploads/hello_world.wav');

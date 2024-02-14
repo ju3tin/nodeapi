@@ -75,6 +75,10 @@ app.post('/why', upload.single('file'), async (req, res) => {
 
 
 const data = await fs.promises.readFile(audioData);
+
+  
+    const tempFilePath = `/tmp/tempfile.txt`;
+    await fs.promises.writeFile(tempFilePath, data);
   
 
  // const audioFile = { audioData };

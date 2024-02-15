@@ -62,6 +62,30 @@ app.get('/why', (req, res) => {
 
 } )
 
+app.get('/q1/:name', (req, res) => {
+  const name = req.params.name;
+
+let config = {
+  method: 'get',
+  maxBodyLength: Infinity,
+  url: `https://api.wit.ai/message?v=20240214&q=${name}`,
+  headers: { 
+    'Authorization': 'Bearer OQ3VFYQJNEXNAQVNZ2UOTOU4TMVOITL4'
+  }
+};
+
+axios.request(config)
+.then((response) => {
+//  console.log(JSON.stringify(response.data));
+   res.send(JSON.stringify(response.data));
+})
+.catch((error) => {
+  console.log(error);
+});
+
+
+});
+
 app.post('/why', upload.single('file'), async (req, res) => {
 
 

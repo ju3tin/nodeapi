@@ -367,6 +367,15 @@ function removeLastCharacters(inputString1, numCharacters1) {
 
 const modifiedString3 = removeLastCharacters(modifiedString2, 5);
 //console.log(modifiedString3);
+
+let config = {
+  method: 'get',
+  maxBodyLength: Infinity,
+  url: `https://api.wit.ai/message?v=20240214&q=${modifiedString3}`,
+  headers: { 
+    'Authorization': 'Bearer OQ3VFYQJNEXNAQVNZ2UOTOU4TMVOITL4'
+  }
+};
     
       console.log(data);
      res.write(modifiedString3);

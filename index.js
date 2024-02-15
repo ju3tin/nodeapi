@@ -376,6 +376,11 @@ let config = {
     'Authorization': 'Bearer OQ3VFYQJNEXNAQVNZ2UOTOU4TMVOITL4'
   }
 };
+
+axios.request(config)
+.then((response) => {
+  console.log(JSON.stringify(response.data));
+})
     
       console.log(data);
      res.write(modifiedString3);

@@ -379,12 +379,14 @@ let config = {
 
 axios.request(config)
 .then((response) => {
-  console.log(JSON.stringify(response.data));
+//  console.log(JSON.stringify(response.data));
+    res.write(JSON.stringify(response.data));
+    res.send();
 })
     
-      console.log(data);
-     res.write(modifiedString3);
-    res.send();
+//      console.log(data);
+ //    res.write(modifiedString3);
+ //   res.send();
   })
   .catch((err) => {
       console.log(err);

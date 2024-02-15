@@ -219,6 +219,8 @@ const modifiedString3 = removeLastCharacters(modifiedString2, 5);
 
 } );
 
+
+
 app.post('/question', upload.single('file'), async (req, res) => {
 
 
@@ -313,6 +315,16 @@ fs.readdir(tmpFolderPath, (err, files) => {
 });
 
   function removeWordsAfterLastOccurrence(inputString, targetWord) {
+  const lastIndex = inputString.lastIndexOf(targetWord);
+
+  if (lastIndex !== -1) {
+    // Remove the target word and everything after its last occurrence
+    const modifiedString = inputString.substring(0, lastIndex);
+    return modifiedString;
+  }
+
+  // If the target word is not found, return the original string
+  return inputString;
 }
 
 // Example usage:
@@ -327,6 +339,16 @@ const modifiedString = removeWordsAfterLastOccurrence(originalString, targetWord
 
 
 function removeWordsBeforeLastOccurrence(inputString1, targetWord1) {
+  const lastIndex1 = inputString1.lastIndexOf(targetWord1);
+
+  if (lastIndex1 !== -1) {
+    // Remove every word before and including the last occurrence of the target word
+    const modifiedString1 = inputString1.substring(lastIndex1);
+    return modifiedString1;
+  }
+
+  // If the target word is not found, return the original string
+  return inputString1;
 }
 
 // Example usage:
@@ -347,31 +369,15 @@ const modifiedString3 = removeLastCharacters(modifiedString2, 5);
 //console.log(modifiedString3);
     
       console.log(data);
-
-let config = {
-  method: 'get',
-  maxBodyLength: Infinity,
-  url: 'https://api.wit.ai/message?v=20240214&q=fuck you',
-  headers: { 
-    'Authorization': 'Bearer OQ3VFYQJNEXNAQVNZ2UOTOU4TMVOITL4'
-  }
-};
-
-axios.request(config)
-.then((response) => {
-  console.log(JSON.stringify(response.data));
-  res.write(modifiedString3);
+     res.write(modifiedString3);
     res.send();
-  
-})
-    
-   
   })
   .catch((err) => {
       console.log(err);
   })
 
 } );
+
 
 
 app.post('/upload1', upload.single('file'), async (req, res) => {

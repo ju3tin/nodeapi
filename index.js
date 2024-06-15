@@ -620,7 +620,7 @@ app.get('/dude9', (req, res) => {
   .then((response) => {
   //  console.log(JSON.stringify(response.data));
   //  res.writeHead(200, { 'Content-Type': 'text/html' });
-
+const dude45 = JSON.stringify(response.data);
     // Set response content    
     res.write(JSON.stringify(response.data));
   //  res.status(200).json('Welcome, your app is working well');

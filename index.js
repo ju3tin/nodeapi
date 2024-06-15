@@ -621,8 +621,10 @@ app.get('/dude9', (req, res) => {
   //  console.log(JSON.stringify(response.data));
   //  res.writeHead(200, { 'Content-Type': 'text/html' });
 const dude45 = JSON.stringify(response.data);
+
+  const finalData = dude45.replace(/\\/g, "");
     // Set response content    
-    res.write(JSON.stringify(response.data));
+    res.write(finalData);
   //  res.status(200).json('Welcome, your app is working well');
     res.send();//end the response
   })
